@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bin2Dec</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <form>
+            <h1>Conversor de código binário</h1>
+            <span class="error" id="error">Apenas numeros 1 e 0</span>
+            <div class="input-group">
+                <label for="">Binário: </label>
+                <input type="text" id="binary">
+            </div>
+            <div class="input-group">
+                <label for="">Decimal convertido: </label>
+                <input type="text" id="decimal" readonly>
+            </div>
+            <input type="submit" id="submit" value="Converter">
+        </form>
+    </div>
+
+    <script>
+        const submit = document.querySelector('#submit');
+        const error = document.querySelector('#error');
+        const response = document.querySelector('#decimal');
+        let bina = '';
+
+        submit.addEventListener('click', (e) => {
+            e.preventDefault();
+            error.style.display = "none";
+            getData();
+            validateBin(bina);
+            bin2dec(bina);
+        })
+
+        function getData() {
+            bina = document.querySelector('#binary').value;
+        }
+
+        function validateBin(bin) {
+            for (let i = 0; i < bina.length; i++) {
+                if(bina.charAt(i) != 0 && bina.charAt(i) != 1) {
+                    error.style.display = 'block';
+                    return;
+                }
+            }
+        }
+        
+        function bin2dec(bin) {
+            let decimal = 0;
+
+            decimal = parseInt(bin, 2);
+
+            returnData(decimal);
+        }
+
+        function returnData(deci) {
+            response.value = deci;
+        }
+    </script>
+</body>
+</html>
